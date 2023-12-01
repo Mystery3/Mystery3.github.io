@@ -1,0 +1,49 @@
+h1, h2 {
+    font-family: Prompt, Arial, sans-serif;
+    font-size: 60px;
+
+    margin: 0px;
+}
+
+p {
+    font-family: Verdana, Tahoma, Arial, sans-serif;
+    font-size: 16px;
+}
+
+body {
+    margin: 0px;
+    margin-top: 64px;
+
+    background-color: darkslategray;
+}
+
+.header {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    margin: 0px;
+    padding: 10px;
+    padding-left: 5px;
+
+    background-color: aliceblue;
+}
+
+.headerButton {
+    font-family: Prompt, Arial, sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.contentGroup {
+    width: 60%;
+    margin: auto;
+    margin-top: 20px;
+    padding: 20px;
+    padding-top: 10px;
+
+    background-color: aliceblue;
+}
