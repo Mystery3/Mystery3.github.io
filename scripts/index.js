@@ -8,7 +8,7 @@ function dataInclude() {
     var includes = $('[data-include]')
     $.each(includes, function() {
         var included = $(this).attr('data-include')
-        if (included == 'latest') { $(this).attr('data-include', $('#latest').attr('content')) }
+        if (included === 'latest') { $(this).attr('data-include', $('#latest').attr('content')) }
         var file = 'posts/' + $(this).attr('data-include') + '.html'
         $(this).load(file)
     })
