@@ -11,7 +11,7 @@ function dataInclude() {
         if (included === 'latest') { $(this).attr('data-include', $('#latest').attr('content')) }
         var file = 'posts/' + $(this).attr('data-include') + '.html'
         $(this).html('<h1>Uh oh!</h1><hr><p>This post failed to load.</p>')
-        $.get(file, function(data) { $(this).html(data) })
+        $.get(file, function(data) { $(this).html(data);alert('loaded') })
     })
 }
 
