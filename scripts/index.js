@@ -18,12 +18,15 @@ function changePost(delta) {
     /** Also disables/enables next/previous buttons */
     var latest = parseInt($('#latest').attr('content'), 10)
     var current = parseInt($('.post').attr('data-include'), 10)
+    var newPost = current + delta
 
-    if (current + 1 > latest) { $('#nextPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) } 
-    else { $('#nextPost').attr({'onclick': 'changePost(1)', 'class': 'arrowButton'}) }
-    if (current - 1 > latest) { $('#previousPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) } 
-    else { $('#previousPost').attr({'onclick': 'changePost(-1)', 'class': 'arrowButton'}) }
+    if(newPost > latest || newPost < 0) {return}
 
-    $('.post').attr('data-include', (current + delta).toString().padStart(4, '0'))
+    $('.post').attr('data-include', (newPost).toString().padStart(4, '0'))
     dataInclude()
+
+    if (newPost + 1 > latest) { $('#nextPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) } 
+    else { $('#nextPost').attr({'onclick': 'changePost(1)', 'class': 'arrowButton'}) }
+    if (newPost - 1 < 0) { $('#previousPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) } 
+    else { $('#previousPost').attr({'onclick': 'changePost(-1)', 'class': 'arrowButton'}) }
 }
