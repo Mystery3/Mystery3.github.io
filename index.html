@@ -24,7 +24,10 @@
     </div>
     <div class="contentGroup">
         <div class="post" data-include="latest"></div>
-        <button class="arrowButton" id="previousPost" onclick="changePost(-1)">&lt;</button>
-        <button class="arrowButton" id="nextPost" onclick="changePost(1)">&gt;</button>
+        <div class="arrowButtons">
+            <button class="arrowButton" id="previousPost" onclick="changePost(-1)">&lt; Older</button>
+            <div id="postNumber">0</div>
+            <button class="arrowButton" id="nextPost" onclick="changePost(1)">Newer &gt;</button>
+        </div>
     </div>
 </body>

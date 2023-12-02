@@ -10,7 +10,7 @@ function dataInclude() {
         var included = $(this).attr('data-include')
         if (included === 'latest') { $(this).attr('data-include', $('#latest').attr('content')) }
         var file = 'posts/' + $(this).attr('data-include') + '.html'
-        $(this).html('<h1>Uh oh!</h1><hr><p>This post failed to load.</p>')
+        $(this).html('<h1>Uh oh!</h1><hr><p>This post failed to load.</p><hr>')
         $(this).load(file)
     })
 }
@@ -26,7 +26,7 @@ function changePost(delta) {
     $('.post').attr('data-include', (newPost).toString().padStart(4, '0'))
     dataInclude()
 
-    if (newPost + 1 > latest) { $('#nextPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) } 
+    if (newPost + 1 > latest) { $('#nextPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) } // may make this a function
     else { $('#nextPost').attr({'onclick': 'changePost(1)', 'class': 'arrowButton'}) }
     if (newPost - 1 < 0) { $('#previousPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) } 
     else { $('#previousPost').attr({'onclick': 'changePost(-1)', 'class': 'arrowButton'}) }
