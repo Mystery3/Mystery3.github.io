@@ -1,40 +1,43 @@
+var latest;
+
 $(function() {
-    changePost(0)
+    latest = $('#latest').attr('content')
+
+    postInclude()
+    buttonFilter()
 })
 
-function dataInclude() {
+function postInclude() {
     /** This function based on an answer by mwiegboldt at https://stackoverflow.com/a/31837264 */
-    var includes = $('[data-include]')
+    var includes = $('[post-include]')
     $.each(includes, function() {
-        var included = $(this).attr('data-include')
-        if (included === 'latest') { $(this).attr('data-include', $('#latest').attr('content')) }
-        var file = 'posts/' + $(this).attr('data-include') + '.html'
+        var included = $(this).attr('post-include')
+        if (included === 'latest') { $(this).attr('post-include', latest) }
+        var file = 'posts/' + $(this).attr('post-include') + '.html'
         $(this).html('<h1>Uh oh!</h1><hr><p>This post failed to load.</p><hr>')
         $(this).load(file)
     })
 }
 
 function buttonFilter(newPost) {
-    if (newPost + 1 > parseInt($('#latest').attr('content'), 10)) { $('#nextPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) }
+    if (newPost + 1 > parseInt(latest, 10)) { $('#nextPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) }
     else { $('#nextPost').attr({'onclick': 'changePost(1)', 'class': 'arrowButton'}) }
     if (newPost - 1 < 0) { $('#previousPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) } 
     else { $('#previousPost').attr({'onclick': 'changePost(-1)', 'class': 'arrowButton'}) }
 }
 
 function changePost(delta) {
-    var latest = parseInt($('#latest').attr('content'), 10)
-    var current = parseInt($('.post').attr('data-include'), 10)
-    var newPost = current + delta
+    var newPost = parseInt($('.post').attr('post-include'), 10) + delta
 
     if(newPost > latest || newPost < 0) { return }
 
-    $('.post').attr('data-include', (newPost).toString().padStart(4, '0'))
-    dataInclude()
+    $('.post').attr('post-include', (newPost).toString().padStart(4, '0'))
+    postInclude()
     buttonFilter(newPost)
 }
 
 function setPost(newPost) {
-    $('.post').attr('data-include', newPost)
-    dataInclude()
+    $('.post').attr('post-include', newPost)
+    postInclude()
     buttonFilter(newPost)
 }
