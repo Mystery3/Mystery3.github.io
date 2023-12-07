@@ -1,5 +1,4 @@
 $(function() {
-    dataInclude()
     changePost(0)
 })
 
@@ -15,19 +14,27 @@ function dataInclude() {
     })
 }
 
+function buttonFilter(newPost) {
+    if (newPost + 1 > parseInt($('#latest').attr('content'), 10)) { $('#nextPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) }
+    else { $('#nextPost').attr({'onclick': 'changePost(1)', 'class': 'arrowButton'}) }
+    if (newPost - 1 < 0) { $('#previousPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) } 
+    else { $('#previousPost').attr({'onclick': 'changePost(-1)', 'class': 'arrowButton'}) }
+}
+
 function changePost(delta) {
-    /** Also disables/enables next/previous buttons */
     var latest = parseInt($('#latest').attr('content'), 10)
     var current = parseInt($('.post').attr('data-include'), 10)
     var newPost = current + delta
 
-    if(newPost > latest || newPost < 0) {return}
+    if(newPost > latest || newPost < 0) { return }
 
     $('.post').attr('data-include', (newPost).toString().padStart(4, '0'))
     dataInclude()
+    buttonFilter(newPost)
+}
 
-    if (newPost + 1 > latest) { $('#nextPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) } // may make this a function
-    else { $('#nextPost').attr({'onclick': 'changePost(1)', 'class': 'arrowButton'}) }
-    if (newPost - 1 < 0) { $('#previousPost').attr({'onclick': '', 'class': 'arrowButtonDisabled'}) } 
-    else { $('#previousPost').attr({'onclick': 'changePost(-1)', 'class': 'arrowButton'}) }
+function setPost(newPost) {
+    $('.post').attr('data-include', newPost)
+    dataInclude()
+    buttonFilter(newPost)
 }
